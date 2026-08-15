@@ -1,0 +1,136 @@
+@-moz-document domain("music.youtube.com") {
+
+    /* --- COLOR PALETTE (VARIABLES) --- */
+    :root {
+        --bg-main: #0a0a0c;                 /* Deep background black */
+        --bg-card: #141418;                 /* Card / Menu background */
+        --bg-hover: #202127;                /* Hover state */
+        --accent-red: #c81836;              /* Geass Crimson Red (Primary buttons, active states) */
+        --accent-red-hover: #e02243;        /* Bright red hover */
+        --accent-green: #687e67;            /* Muted green (Cross / secondary accents) */
+        --text-primary: #e2e5eb;            /* Bright silver / light gray */
+        --text-secondary: #8d939e;          /* Ash / medium gray */
+        --border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* --- GENERAL BACKGROUND AND BASE ELEMENTS --- */
+    ytmusic-app,
+    ytmusic-app-layout,
+    #page-manager,
+    body {
+        background-color: var(--bg-main) !important;
+        color: var(--text-primary) !important;
+    }
+
+    /* --- TOP NAVIGATION BAR --- */
+    ytmusic-nav-bar {
+        background-color: rgba(10, 10, 12, 0.95) !important;
+        border-bottom: 1px solid var(--border-color) !important;
+        backdrop-filter: blur(10px);
+    }
+
+    /* Logo styling */
+    ytmusic-logo {
+        filter: grayscale(0.2);
+    }
+
+    /* Search Input Box */
+    ytmusic-search-box {
+        --ytmusic-search-background: #14141b !important;
+        --ytmusic-search-text: var(--text-primary) !important;
+    }
+
+    /* --- BOTTOM PLAYER BAR --- */
+    ytmusic-player-bar {
+        background-color: #101014 !important;
+        border-top: 1px solid var(--border-color) !important;
+    }
+
+    /* Progress and Volume Sliders */
+    #progress-bar.ytmusic-player-bar,
+    #volume-slider.ytmusic-player-bar {
+        --paper-slider-active-color: var(--accent-red) !important;
+        --paper-slider-knob-color: var(--accent-red) !important;
+        --paper-slider-container-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    /* Player Controls (Play, Pause, Next, Prev) */
+    ytmusic-player-bar #play-pause-button {
+        --ytmusic-play-button-icon-color: var(--bg-main) !important;
+        background-color: var(--accent-red) !important;
+        border-radius: 50%;
+    }
+
+    ytmusic-player-bar #play-pause-button:hover {
+        background-color: var(--accent-red-hover) !important;
+        box-shadow: 0 0 12px rgba(200, 24, 54, 0.5);
+    }
+
+    /* --- CHIPS & FILTER BUTTONS --- */
+    ytmusic-chip-cloud-chip-renderer[chip-style="STYLE_DEFAULT"] {
+        background-color: var(--bg-card) !important;
+        color: var(--text-secondary) !important;
+        border: 1px solid var(--border-color) !important;
+    }
+
+    ytmusic-chip-cloud-chip-renderer[chip-style="STYLE_DEFAULT"]:hover,
+    ytmusic-chip-cloud-chip-renderer[selected] {
+        background-color: var(--accent-red) !important;
+        color: #ffffff !important;
+        border-color: var(--accent-red) !important;
+    }
+
+    /* --- CARDS AND LIBRARY LISTS --- */
+    ytmusic-two-row-item-renderer,
+    ytmusic-responsive-list-item-renderer {
+        background-color: transparent !important;
+        transition: background-color 0.2s ease;
+    }
+
+    ytmusic-responsive-list-item-renderer:hover {
+        background-color: var(--bg-hover) !important;
+    }
+
+    /* Primary and Secondary Text Styling */
+    .title, 
+    yt-formatted-string.ytmusic-two-row-item-renderer {
+        color: var(--text-primary) !important;
+    }
+
+    .subtitle,
+    .second-row,
+    .byline {
+        color: var(--text-secondary) !important;
+    }
+
+    /* --- ICONS & SECONDARY BUTTONS --- */
+    yt-icon,
+    .ytmusic-like-button-renderer {
+        color: var(--text-secondary);
+    }
+
+    /* Active Like Button */
+    .ytmusic-like-button-renderer[like-status="LIKE"] {
+        color: var(--accent-red) !important;
+    }
+
+    /* Text Selection and Scrollbar */
+    ::selection {
+        background: var(--accent-red) !important;
+        color: #fff !important;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #252830;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-green);
+    }
+}
