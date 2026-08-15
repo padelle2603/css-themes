@@ -34,4 +34,4 @@ Discord themes for client modifications:
 ## Documentation
 
 - [DISCLAIMER.md](DISCLAIMER.md) — scope, author's usage, and limitation of liability
-- [LEGAL.md](LEGAL.md) — summary of the legal assessment (international, EU, Italy)
+- [LEGAL.md](LEGAL.md) — summary of the legal assessment (international, EU)
