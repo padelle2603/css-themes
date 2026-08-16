@@ -1,128 +1,739 @@
 /**
- * @name Translucence Core - Mention Background Celeste (ULTRA + Opaco + Hover + TextBox)
- * @description Sfondo menzioni celeste e text box modificato
- * @author Padelle & Adattamento
- * @version 1.0.0
+ * @name Translucence Core
+ * @description Only translucence rules
+ * @author Padelle
  */
 
-/* === IMPORTA IL TEMA BASE DALLA CARTELLA CORRETTA === */
 @import url("https://raw.githubusercontent.com/padelle2603/css-themes/main/Vencord/translucent.theme.css");
 
-/* ============================================ */
-/*           MENZIONI - SFONDO CELESTE           */
-/* ============================================ */
+:root {
+    /* APP ELEMENTS */
+    --app-bg: rgba(0, 0, 0, 0.55);
+    --app-blur: 32px;
+    --app-margin: 24px;
+    --app-radius: 8px;
+    --main-rgb: 0,0,0;
+    --main-content-opacity: 0.2;
+    --sidebar-opacity: 0.35;
+    --main-content-color: rgba(var(--main-rgb), var(--main-content-opacity));
+    --sidebar-color: rgba(var(--main-rgb), var(--sidebar-opacity));
 
-/* Versione ultra-forzata - colpisce TUTTO ciò che è menzione */
-div[class*="mentioned"] {
-    background-color: rgba(0, 150, 255, 0.10) !important;
-    background: rgba(0, 150, 255, 0.10) !important;
+    /* POPOUT SETTINGS */
+    --popout-color: rgba(15,15,15,0.95);
+    --popout-blur: 24px;
+    --popout-radius: 18px;
+    --popout-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    --popout-shadow-border: inset 0 1px 1px hsl(0,0%,50%,0.2), inset 0 -1px 2px rgba(0,0,0,0.5);
+    --popout-header-shadow: 0px 3px 9px 0px hsl(0,0%,0%,0.25);
+
+    /* LIQUID GLASS SETTINGS */
+    --c-glass: hsl(240,0%,75%);
+    --c-light: hsl(0,0%,100%);
+    --c-dark: hsl(0,0%,0%);
+    --glass-reflex-dark: 2;
+    --glass-reflex-light: 0.3;
+    --light-angle: 40deg;
+    --liquid-glass-saturation: 150%;
+    --liquid-glass-color-subtle: hsl(0,100%,100%,0.04);
+    --lx: calc(cos(var(--light-angle)) * -1.414);
+    --ly: calc(sin(var(--light-angle)) * -1.414);
+    --liquid-glass-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+    inset calc(1.8px * var(--lx)) calc(3px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+    inset calc(-2px * var(--lx)) calc(-2px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+    inset calc(-3px * var(--lx)) calc(-8px * var(--ly)) 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+    inset calc(-0.3px * var(--lx)) calc(-1px * var(--ly)) 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+    inset calc(-1.5px * var(--lx)) calc(2.5px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+    inset calc(0px * var(--lx)) calc(3px * var(--ly)) 2px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+    inset calc(2px * var(--lx)) calc(-4.5px * var(--ly)) 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent);
 }
 
-div[class*="mentioned"]::before {
-    background-color: hsl(210, 100%, 50%) !important;
-    background: hsl(210, 100%, 50%) !important;
+/*
+ *  APP ELEMENTS - TRASPARENZA E BLUR
+ */
+body,
+.app__160d8,
+.bg__960e4 {
+    background-color: transparent;
 }
 
-div[class*="mentioned"][class*="--me"]::before {
-    background-color: hsl(210, 100%, 60%) !important;
+.appMount__51fd7 {
+    background: var(--app-bg) !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: cover !important;
 }
 
-/* Forza bruta su tutti i temi */
-[class*="mentioned"] {
-    background-color: rgba(0, 150, 255, 0.35) !important;
+.layers__160d8 {
+    margin-block: 0 var(--app-margin);
+    margin-inline: var(--app-margin);
+    overflow: hidden;
+    z-index: 1;
+    backdrop-filter: none;
 }
 
-[class*="mentioned"]::before {
-    background-color: hsl(210, 100%, 20%) !important;
+.typeMacOS__421ed + .app_a3002d .layers__160d8 {
+    margin: var(--app-margin);
 }
 
-/* Versione ancora più opaca per i messaggi menzionati da te */
-[class*="mentioned"][class*="--me"] {
-    background-color: rgba(0, 150, 255, 0.45) !important;
+.container_a2f514 {
+    background: var(--app-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.container_a2f514 .content_a2f514 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    padding: 16px;
 }
 
-/* ============================================ */
-/*           EFFETTO HOVER PER LE MENZIONI       */
-/* ============================================ */
-
-/* Quando passi il mouse su un messaggio menzionato */
-div[class*="mentioned"]:hover {
-    background-color: rgba(0, 150, 255, 0.15) !important;
-    background: rgba(0, 150, 255, 0.15) !important;
-    transition: background-color 0.2s ease !important;
+.content__5e434 {
+    border-radius: var(--app-radius);
+    border: none;
+    background-color: transparent;
+    box-shadow: var(--popout-shadow-border);
+    backdrop-filter: blur(var(--app-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
 
-/* Hover per le tue menzioni personali */
-[class*="mentioned"][class*="--me"]:hover {
-    background-color: rgba(0, 150, 255, 0.65) !important;
+/*
+ *  CHANNELS LIST - TRASPARENZA
+ */
+.sidebar__5e434 {
+    background-color: var(--sidebar-color);
+    border-start-start-radius: var(--popout-radius);
+    border-end-start-radius: var(--popout-radius);
+}
+.sidebar__5e434:after {
+    display: none;
+}
+.sidebar__5e434 .container__2637a {
+    padding-block-end: calc(var(--custom-app-panels-height, 0) + 10px);
+    background-color: transparent;
 }
 
-/* Hover per la striscia laterale */
-div[class*="mentioned"]:hover::before {
-    background-color: hsl(210, 100%, 70%) !important;
-    background: hsl(210, 100%, 70%) !important;
+.container_f37cb1 {
+    background-color: transparent;
 }
 
-/* Hover per la striscia laterale delle tue menzioni */
-div[class*="mentioned"][class*="--me"]:hover::before {
-    background-color: hsl(210, 100%, 80%) !important;
+.sidebarList__5e434 {
+    backdrop-filter: none;
+    border: none;
 }
 
-/* Animazione delicata al passaggio del mouse */
-[class*="mentioned"] {
-    transition: background-color 0.2s ease, box-shadow 0.2s ease !important;
+/*
+ *  PANELS - TRASPARENZA
+ */
+.panels__5e434 {
+    background-color: transparent;
+    border-radius: calc(var(--app-radius) / 1.5);
+    border: none;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
 }
 
-/* Effetto glow (bagliore) al passaggio del mouse */
-[class*="mentioned"]:hover {
-    box-shadow: inset 0 0 20px rgba(0, 150, 255, 0.15) !important;
+.container_e131a9,
+.container__37e49,
+.content__37e49,
+.activityPanel__5e434 {
+    background: transparent !important;
 }
 
-/* ============================================ */
-/*           TEXT BOX - PIÙ IN ALTO E ARROTONDATO */
-/* ============================================ */
+/*
+ *  PRIVATE CHANNELS - TRASPARENZA
+ */
+.privateChannels_e6b769,
+.scroller__99e7c {
+    background-color: transparent !important;
+}
 
-/* Text box principale - lo sposta più in alto */
+/*
+ *  CHAT AREA - TRASPARENZA
+ */
+.chat_f75fb0,
+.noChannel__01d5c {
+    background-color: var(--main-content-color) !important;
+    border-start-end-radius: var(--app-radius);
+    border-end-end-radius: var(--app-radius);
+}
+
+.chat_f75fb0 .scrollerBase_d125d2 {
+    background-color: transparent;
+}
+
+.chatContent_f75fb0 {
+    background-color: transparent;
+}
+
+.channelChatWrapper_cb9592 {
+    background-color: transparent;
+}
+
+/*
+ *  MEMBERS LIST - TRASPARENZA
+ */
+.membersWrap_c8ffbb {
+    background-color: transparent;
+    border-left: none;
+}
+
+.container_c8ffbb {
+    background-color: transparent;
+}
+
+.members_c8ffbb, .members_c8ffbb > div {
+    background-color: transparent;
+}
+
+/*
+ *  FORMAT TOOLBAR - TRASPARENZA
+ */
+.toolbar_bba883 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    padding: var(--space-4);
+}
+.toolbar_bba883:before {
+    display: none;
+}
+
+/*
+ *  SEARCH RESULTS - TRASPARENZA
+ */
+.searchResultsWrap_a98f3b {
+    background-color: hsl(from var(--sidebar-color) h s l/0.25);
+    border-radius: calc(var(--app-radius) / 1.5);
+    border-inline-start: none;
+    box-shadow: var(--popout-shadow-border);
+}
+
+/*
+ *  MAIN TEXTAREA - TRASPARENZA E BLUR
+ */
 .channelTextArea__74017,
 .wrapper__44df5 {
-    margin-top: -8px !important;
-    margin-bottom: 4px !important;
+    background: rgba(var(--textarea-color), var(--textarea-alpha));
+    border-radius: var(--textarea-radius);
+    border: none;
 }
-
-/* Arrotonda gli angoli del text box */
-.channelTextArea__74017 .scrollableContainer__74017,
-.wrapper__44df5 .scrollableContainer__74017,
-.textArea__74017,
-.richTextEditor__74017 {
-    border-radius: 16px !important;
-}
-
-/* Arrotonda anche il contenitore esterno */
-.channelTextArea__74017,
-.wrapper__44df5 {
-    border-radius: 16px !important;
-}
-
-/* Per il text box quando è espanso (multilinea) */
-.channelTextArea__74017 .scrollableContainer__74017:focus-within,
-.wrapper__44df5 .scrollableContainer__74017:focus-within {
-    border-radius: 16px !important;
-}
-
-/* Adatta il padding interno per mantenere le proporzioni */
 .channelTextArea__74017 .scrollableContainer__74017,
 .wrapper__44df5 .scrollableContainer__74017 {
-    padding: 8px 12px !important;
+    background-color: transparent;
 }
 
-/* Se vuoi che anche il bordo sia arrotondato */
-.channelTextArea__74017,
+.channelTextArea__74017 {
+    margin: 0;
+    box-shadow: var(--liquid-glass-shadow);
+    transition: var(--transition-time) var(--transition-type) background-color !important;
+}
+.channelTextArea__74017:focus-within {
+    background-color: rgb(var(--textarea-color), var(--textarea-alpha-focus));
+    box-shadow: var(--liquid-glass-shadow);
+}
+
 .wrapper__44df5 {
-    border-radius: 16px !important;
-    overflow: hidden !important;
+    margin-block: 12px;
+    margin-inline: 0;
+    padding-block: 11px;
+    padding-inline: 0;
+    box-shadow: var(--liquid-glass-shadow);
 }
 
-/* Per la barra degli strumenti sotto il text box (emoji, allegati, ecc.) */
-.buttons__74017 {
-    padding-top: 2px !important;
+/*
+ *  THREAD - TRASPARENZA
+ */
+.floating__01ae2 {
+    background: transparent;
+}
+
+.chatTarget__01ae2 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--main-content-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.container__01ae2 {
+    background-color: var(--main-content-color);
+    border-radius: var(--app-radius);
+    border: none;
+}
+
+.resizeHandle__01ae2 {
+    background-color: transparent;
+}
+
+.container_fb64c9 {
+    background-color: transparent;
+}
+
+/*
+ *  BETTERDISCORD PLUGIN - ChannelTabs
+ */
+#channelTabs-container {
+margin-block: calc(var(--app-margin) / 2) calc(var(--app-margin) / 4 * -1);
+margin-inline: var(--app-margin);
+padding: 4px !important;
+background-color: var(--sidebar-color) !important;
+border-radius: var(--app-radius);
+backdrop-filter: blur(var(--app-blur));
+}
+
+/*
+ *  DISCOVER - TRASPARENZA
+ */
+.scroller__23746 {
+    background-color: var(--main-content-color);
+    border-end-end-radius: var(--app-radius);
+}
+
+/*
+ *  FORUM NEW POST - TRASPARENZA
+ */
+.container__34c2c {
+    background-color: transparent;
+    border-radius: var(--popout-radius);
+    border: none;
+    overflow: hidden;
+}
+.container__34c2c:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/*
+ *  FRIENDS LIST - TRASPARENZA COMPLETA
+ *  Rende trasparente tutta la sezione amici
+ */
+
+/* Container principale della lista amici */
+.container__133bf,
+.friendsTable__133bf,
+.tabBody__133bf {
+    background-color: var(--main-content-color) !important;
+    border-start-end-radius: var(--app-radius);
+    border-end-end-radius: var(--app-radius);
+    border-top: none;
+    backdrop-filter: blur(var(--app-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/* Rende trasparenti le singole righe degli amici */
+.peopleListItem_cc6179 {
+    background-color: transparent !important;
+    border-radius: var(--list-item-radius);
+    transition: background-color 0.2s ease;
+}
+
+/* Effetto hover sulle righe degli amici */
+.peopleListItem_cc6179:hover {
+    background-color: var(--card-color-hover) !important;
+}
+
+/* Rende trasparente la sezione ActiveNow */
+.activeNow__133bf,
+.container_e8cb0e {
+    background-color: transparent !important;
+}
+
+/* Rende trasparente la barra di ricerca */
+.searchBar__133bf {
+    background-color: rgba(var(--textarea-color), var(--textarea-alpha)) !important;
+    border-radius: var(--input-radius);
+}
+
+/* Rende trasparenti gli header delle categorie */
+.header__133bf,
+.container__5f7a4,
+.content__1e4d3,
+.scroller__1e4d3 {
+    background-color: transparent !important;
+}
+
+/* Rende trasparente il container delle sezioni Online/Offline/etc */
+.container__4f5a7 {
+    background-color: transparent !important;
+}
+
+/*
+ *  NITRO - TRASPARENZA
+ */
+.applicationStore_f07d62 {
+    background-color: var(--main-content-color);
+    border-start-end-radius: var(--app-radius);
+    border-end-end-radius: var(--app-radius);
+}
+.applicationStore_f07d62 .scroller__244e5 {
+    background-color: transparent;
+}
+
+/*
+ *  MESSAGES ACTIONS - TRASPARENZA
+ */
+.popover_f84418.popover_f84418 {
+    background-color: transparent;
+    border-radius: var(--popout-radius);
+    border: none;
+    border: none !important;
+    box-shadow: var(--liquid-glass-shadow), var(--popout-shadow) !important;
+    overflow: hidden;
+}
+.popover_f84418.popover_f84418:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.popover_f84418.popover_f84418:before {
+    box-shadow: none;
+}
+.popover_f84418.popover_f84418:hover {
+    box-shadow: var(--liquid-glass-shadow), var(--popout-shadow) !important;
+}
+
+/*
+ *  POPOUTS
+ */
+.popoutContainer__0f481 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  MODALS - TRASPARENZA
+ */
+.root__49fc1 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(calc(var(--popout-blur) * 1.25)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.backdrop__78332 {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(calc(var(--popout-blur) * 1.4)) !important;
+    opacity: 1 !important;
+}
+
+/* MODALS -> V2 MODALS */
+.container__8a031 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(calc(var(--popout-blur) * 1.25)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  APP DIRECTORY - TRASPARENZA
+ */
+.directoryContainer_da3f59 {
+    height: calc(100% - var(--app-margin) * 1.5);
+    margin-block: calc(var(--app-margin) / 2) var(--app-margin);
+    margin-inline: var(--app-margin);
+    background-color: var(--main-content-color) !important;
+    border-radius: var(--app-radius);
+    backdrop-filter: blur(var(--app-blur));
+}
+
+/*
+ *  AUTOSCOMPLETE - TRASPARENZA
+ */
+.autocomplete__13533 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+.autocomplete__13533 .wrapper_b1e4f3 {
+    background-color: transparent;
+}
+.autocomplete__13533 .base__13533 {
+    border-radius: var(--popout-radius);
+}
+
+.container_d5ae15 {
+    border-radius: var(--popout-radius);
+    border: none;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+}
+.container_d5ae15:before {
+    position: absolute;
+    content: " ";
+    inset: 0;
+    background-color: var(--popout-color);
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.container_d5ae15 .autocompleteShadow_d5ae15 {
+    box-shadow: none !important;
+}
+.container_d5ae15 .autocompleteArrow-2CRgr2 {
+    background-color: var(--popout-color) !important;
+    box-shadow: none !important;
+}
+
+/*
+ *  CONTEXT MENU - TRASPARENZA
+ */
+.menu_c1e9c4 {
+    border-radius: var(--popout-radius);
+    border: none;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+}
+.menu_c1e9c4:before {
+    position: absolute;
+    content: " ";
+    inset: 0;
+    background-color: var(--popout-color);
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/*
+ *  EMOJI PICKER - TRASPARENZA
+ */
+.wrapper_c0e32c,
+.emojiPicker_c0e32c {
+    background-color: transparent;
+}
+
+.contentWrapper__08434 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.wrapper_c0e32c:not(.emojiPickerHasTabWrapper_c0e32c) {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  MESSAGES POPOUT - TRASPARENZA
+ */
+.messagesPopoutWrap_e8b59c {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    max-height: 80vh !important;
+}
+
+.channelHeader__35a7e {
+    border-radius: var(--popout-radius);
+    border: none;
+    overflow: hidden;
+}
+.channelHeader__35a7e:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.channelHeader__35a7e:before {
+    box-shadow: none;
+}
+
+.container_fc561d {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  SEARCH POPOUT - TRASPARENZA
+ */
+.container__16eb0 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  THREADS POPOUT - TRASPARENZA
+ */
+.container_d9c882 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.popout__76f04 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  USER POPOUT - TRASPARENZA
+ */
+.outer_c0bea0:not(.custom-user-profile-theme) {
+    --background-surface-high: var(--popout-color) !important;
+    --user-profile-overlay-background: var(--profile-gradient-primary-color) !important;
+    --profile-gradient-primary-color: var(--popout-color) !important;
+    --profile-gradient-secondary-color: var(--popout-color) !important;
+    --profile-avatar-border-color: var(--popout-color) !important;
+    --profile-body-background-color: var(--popout-color) !important;
+    --bg-surface-overlay: var(--profile-gradient-primary-color) !important;
+    --bg-mod-faint: var(--profile-body-background-color) !important;
+}
+
+.outer_c0bea0.user-profile-popout {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  SERVERS LIST - TRASPARENZA
+ */
+.wrapper_ef3116 {
+    margin-block-end: calc(var(--custom-app-panels-height, 0) + 10px);
+    background-color: transparent;
+}
+
+.scroller_ef3116 {
+    padding-block-start: var(--space-12);
+    background-color: transparent !important;
+}
+
+/*
+ *  SETTINGS - TRASPARENZA
+ */
+.contentRegion__23e6b {
+    background-color: transparent;
+}
+
+.container__9a9f9 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.contentRegionScroller__23e6b {
+    background-color: transparent;
+}
+
+.standardSidebarView__23e6b {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    margin-block-start: var(--custom-app-top-bar-height);
+}
+
+.sidebarRegionScroller__23e6b {
+    background-color: transparent;
+}
+
+.layer__960e4 {
+    background-color: transparent;
+}
+
+.content_e9e3ed,
+.contentHeader_e9e3ed {
+    background-color: transparent;
+}
+
+/*
+ *  SHOP - TRASPARENZA
+ */
+.shop__6db1d {
+    border-start-end-radius: var(--app-radius);
+    border-end-end-radius: var(--app-radius);
+}
+
+.shop__08415,
+.shop__6db1d {
+    background-color: var(--main-content-color);
+}
+
+.page__1feb0,
+.shop__08415 {
+    background-color: transparent;
+}
+
+/*
+ *  VISUAL REFRESH
+ */
+.visual-refresh.refresh-fast-follow-guild-bg .bg__960e4 {
+    background: transparent;
+}
+.visual-refresh.refresh-fast-follow-guild-bg .wrapper_ef3116 {
+    background: transparent;
 }
