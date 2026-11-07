@@ -10,6 +10,8 @@
  *  - :root now defines every variable used below.
  */
 
+@import url("https://raw.githubusercontent.com/padelle2603/css-themes/main/Vencord/translucent.theme.css");
+
 :root {
     /* APP ELEMENTS */
     --app-bg: rgba(0, 0, 0, 0.55);
