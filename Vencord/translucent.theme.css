@@ -1,7 +1,13 @@
 /**
- * @name Translucence Core
- * @description Only translucence rules - Modernized with resilient selectors & CSS variables
+ * @name Translucence v2
+ * @description Transparent Discord theme (liquid glass + blur). Class names updated for the 2026 module hashing.
  * @author Padelle
+ *
+ * v2 changelog:
+ *  - All class names updated following Discord-Class-Names-Before-After.md
+ *  - :root now defines every variable used by the rules (textarea colors,
+ *    transitions, radii) that were previously missing.
+ *  - Comments reorganized into clear sections (ALL CAPS).
  */
 
 :root {
@@ -10,70 +16,72 @@
     --app-blur: 32px;
     --app-margin: 24px;
     --app-radius: 8px;
-    --main-rgb: 0, 0, 0;
+    --main-rgb: 0,0,0;
     --main-content-opacity: 0.2;
     --sidebar-opacity: 0.35;
     --main-content-color: rgba(var(--main-rgb), var(--main-content-opacity));
     --sidebar-color: rgba(var(--main-rgb), var(--sidebar-opacity));
 
     /* POPOUT SETTINGS */
-    --popout-color: rgba(15, 15, 15, 0.95);
+    --popout-color: rgba(15,15,15,0.95);
     --popout-blur: 24px;
     --popout-radius: 18px;
-    --popout-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-    --popout-shadow-border: inset 0 1px 1px hsl(0, 0%, 50%, 0.2), inset 0 -1px 2px rgba(0, 0, 0, 0.5);
-    --popout-header-shadow: 0px 3px 9px 0px hsl(0, 0%, 0%, 0.25);
+    --popout-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    --popout-shadow-border: inset 0 1px 1px hsl(0,0%,50%,0.2), inset 0 -1px 2px rgba(0,0,0,0.5);
+    --popout-header-shadow: 0px 3px 9px 0px hsl(0,0%,0%,0.25);
+
+    /* TEXTAREA / INPUTS (v2: previously referenced but never defined) */
+    --textarea-color: 0,0,0;
+    --textarea-alpha: 0.25;
+    --textarea-alpha-focus: 0.5;
+    --textarea-radius: 16px;
+    --input-radius: 8px;
+    --list-item-radius: 8px;
+    --card-color-hover: rgba(255,255,255,0.06);
+
+    /* TRANSITIONS (v2) */
+    --transition-time: 160ms;
+    --transition-type: ease-out;
 
     /* LIQUID GLASS SETTINGS */
-    --c-glass: hsl(240, 0%, 75%);
-    --c-light: hsl(0, 0%, 100%);
-    --c-dark: hsl(0, 0%, 0%);
+    --c-glass: hsl(240,0%,75%);
+    --c-light: hsl(0,0%,100%);
+    --c-dark: hsl(0,0%,0%);
     --glass-reflex-dark: 2;
     --glass-reflex-light: 0.3;
     --light-angle: 40deg;
     --liquid-glass-saturation: 150%;
-    --liquid-glass-color-subtle: hsl(0, 100%, 100%, 0.04);
+    --liquid-glass-color-subtle: hsl(0,100%,100%,0.04);
     --lx: calc(cos(var(--light-angle)) * -1.414);
     --ly: calc(sin(var(--light-angle)) * -1.414);
     --liquid-glass-shadow:
-        inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
-        inset calc(1.8px * var(--lx)) calc(3px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
-        inset calc(-2px * var(--lx)) calc(-2px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
-        inset calc(-3px * var(--lx)) calc(-8px * var(--ly)) 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
-        inset calc(-0.3px * var(--lx)) calc(-1px * var(--ly)) 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
-        inset calc(-1.5px * var(--lx)) calc(2.5px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
-        inset calc(0px * var(--lx)) calc(3px * var(--ly)) 2px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
-        inset calc(2px * var(--lx)) calc(-4.5px * var(--ly)) 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent);
-
-    /* DISCORD CSS OVERRIDES FOR FULL TRANSPARENCY */
-    --bg-base-primary: transparent !important;
-    --bg-base-secondary: transparent !important;
-    --bg-base-tertiary: transparent !important;
-    --background-primary: transparent !important;
-    --background-secondary: transparent !important;
-    --background-secondary-alt: transparent !important;
-    --background-tertiary: transparent !important;
-    --background-floating: var(--popout-color) !important;
-    --channeltextarea-background: transparent !important;
+    inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+    inset calc(1.8px * var(--lx)) calc(3px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+    inset calc(-2px * var(--lx)) calc(-2px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+    inset calc(-3px * var(--lx)) calc(-8px * var(--ly)) 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+    inset calc(-0.3px * var(--lx)) calc(-1px * var(--ly)) 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+    inset calc(-1.5px * var(--lx)) calc(2.5px * var(--ly)) 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+    inset calc(0px * var(--lx)) calc(3px * var(--ly)) 2px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+    inset calc(2px * var(--lx)) calc(-4.5px * var(--ly)) 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent);
 }
 
 /*
  *  APP ELEMENTS - TRASPARENZA E BLUR
  */
 body,
-[class*="app_"],
-[class*="bg_"] {
-    background-color: transparent !important;
+.app_QbT-Jy,
+.bg_Fd0FEH {
+    background-color: transparent;
 }
 
-[class*="appMount_"] {
+.appMount_gEkNtR {
     background: var(--app-bg) !important;
     background-repeat: no-repeat !important;
     background-position: center !important;
     background-size: cover !important;
 }
 
-[class*="layers_"] {
+.layers_QbT-Jy {
     margin-block: 0 var(--app-margin);
     margin-inline: var(--app-margin);
     overflow: hidden;
@@ -81,11 +89,26 @@ body,
     backdrop-filter: none;
 }
 
-[class*="typeMacOS_"] + [class*="app_"] [class*="layers_"] {
+.typeMacOS__421ed + .app_YRXZu0 .layers_QbT-Jy {
     margin: var(--app-margin);
 }
 
-[class*="content_"]:has(> [class*="sidebar_"]) {
+.container_oDjP9R {
+    background: var(--app-bg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.container_oDjP9R .content_oDjP9R {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    padding: 16px;
+}
+
+.content_pog62O {
     border-radius: var(--app-radius);
     border: none;
     background-color: transparent;
@@ -96,19 +119,24 @@ body,
 /*
  *  CHANNELS LIST - TRASPARENZA
  */
-[class*="sidebar_"] {
-    background-color: var(--sidebar-color) !important;
+.sidebar_pog62O {
+    background-color: var(--sidebar-color);
     border-start-start-radius: var(--popout-radius);
     border-end-start-radius: var(--popout-radius);
 }
-[class*="sidebar_"]:after {
+.sidebar_pog62O:after {
     display: none;
 }
-[class*="sidebar_"] [class*="container_"] {
+.sidebar_pog62O .container_H5ozaj {
+    padding-block-end: calc(var(--custom-app-panels-height, 0) + 10px);
     background-color: transparent;
 }
 
-[class*="sidebarList_"] {
+.container_XH4OpX {
+    background-color: transparent;
+}
+
+.sidebarList_pog62O {
     backdrop-filter: none;
     border: none;
 }
@@ -116,71 +144,85 @@ body,
 /*
  *  PANELS - TRASPARENZA
  */
-[class*="panels_"] {
-    background-color: transparent !important;
+.panels_pog62O {
+    background-color: transparent;
     border-radius: calc(var(--app-radius) / 1.5);
     border: none;
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
 }
 
-[class*="panels_"] [class*="container_"],
-[class*="panels_"] [class*="content_"],
-[class*="activityPanel_"] {
+.container_9U6LUN,
+.container__37e49,
+.content__37e49,
+.activityPanel_pog62O {
     background: transparent !important;
 }
 
 /*
  *  PRIVATE CHANNELS - TRASPARENZA
  */
-[class*="privateChannels_"],
-[class*="scroller_"][class*="privateChannels_"] {
+.privateChannels_u88IQl,
+.scroller_Bce46W {
     background-color: transparent !important;
 }
 
 /*
  *  CHAT AREA - TRASPARENZA
  */
-[class*="chat_"],
-[class*="noChannel_"] {
+.chat_z_gUBg,
+.noChannel_RvzdCg {
     background-color: var(--main-content-color) !important;
     border-start-end-radius: var(--app-radius);
     border-end-end-radius: var(--app-radius);
 }
 
-[class*="chat_"] [class*="scrollerBase_"],
-[class*="chatContent_"],
-[class*="channelChatWrapper_"] {
-    background-color: transparent !important;
+.chat_z_gUBg .scrollerBase_tqapBM {
+    background-color: transparent;
+}
+
+.chatContent_z_gUBg {
+    background-color: transparent;
+}
+
+.channelChatWrapper_cb9592 {
+    background-color: transparent;
 }
 
 /*
  *  MEMBERS LIST - TRASPARENZA
  */
-[class*="membersWrap_"],
-[class*="members_"],
-[class*="members_"] > div {
-    background-color: transparent !important;
+.membersWrap_86es0b {
+    background-color: transparent;
     border-left: none;
+}
+
+.container_86es0b {
+    background-color: transparent;
+}
+
+.members_86es0b, .members_86es0b > div {
+    background-color: transparent;
 }
 
 /*
  *  FORMAT TOOLBAR - TRASPARENZA
  */
-[class*="toolbar_"] {
+.toolbar_hPmUPu {
     border-radius: var(--popout-radius);
     border: none;
     background-color: var(--popout-color);
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    padding: var(--space-4);
 }
-[class*="toolbar_"]:before {
+.toolbar_hPmUPu:before {
     display: none;
 }
 
 /*
  *  SEARCH RESULTS - TRASPARENZA
  */
-[class*="searchResultsWrap_"] {
+.searchResultsWrap_a98f3b {
     background-color: hsl(from var(--sidebar-color) h s l/0.25);
     border-radius: calc(var(--app-radius) / 1.5);
     border-inline-start: none;
@@ -190,25 +232,43 @@ body,
 /*
  *  MAIN TEXTAREA - TRASPARENZA E BLUR
  */
-[class*="channelTextArea_"],
-[class*="channelTextArea_"] [class*="scrollableContainer_"] {
+.channelTextArea_2x8-Qn,
+.wrapper__44df5 {
+    background: rgba(var(--textarea-color), var(--textarea-alpha));
+    border-radius: var(--textarea-radius);
+    border: none;
+}
+.channelTextArea_2x8-Qn .scrollableContainer_2x8-Qn,
+.wrapper__44df5 .scrollableContainer_2x8-Qn {
     background-color: transparent;
 }
 
-[class*="channelTextArea_"] {
+.channelTextArea_2x8-Qn {
     margin: 0;
     box-shadow: var(--liquid-glass-shadow);
-    transition: background-color 0.2s ease !important;
+    transition: var(--transition-time) var(--transition-type) background-color !important;
+}
+.channelTextArea_2x8-Qn:focus-within {
+    background-color: rgb(var(--textarea-color), var(--textarea-alpha-focus));
+    box-shadow: var(--liquid-glass-shadow);
+}
+
+.wrapper__44df5 {
+    margin-block: 12px;
+    margin-inline: 0;
+    padding-block: 11px;
+    padding-inline: 0;
+    box-shadow: var(--liquid-glass-shadow);
 }
 
 /*
  *  THREAD - TRASPARENZA
  */
-[class*="floating_"] {
+.floating__01ae2 {
     background: transparent;
 }
 
-[class*="chatTarget_"] {
+.chatTarget__01ae2 {
     border-radius: var(--popout-radius);
     border: none;
     background-color: var(--main-content-color);
@@ -216,7 +276,17 @@ body,
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
 
-[class*="resizeHandle_"] {
+.container__01ae2 {
+    background-color: var(--main-content-color);
+    border-radius: var(--app-radius);
+    border: none;
+}
+
+.resizeHandle__01ae2 {
+    background-color: transparent;
+}
+
+.container_UU236g {
     background-color: transparent;
 }
 
@@ -224,19 +294,58 @@ body,
  *  BETTERDISCORD PLUGIN - ChannelTabs
  */
 #channelTabs-container {
-    margin-block: calc(var(--app-margin) / 2) calc(var(--app-margin) / 4 * -1);
-    margin-inline: var(--app-margin);
-    padding: 4px !important;
-    background-color: var(--sidebar-color) !important;
-    border-radius: var(--app-radius);
-    backdrop-filter: blur(var(--app-blur));
+margin-block: calc(var(--app-margin) / 2) calc(var(--app-margin) / 4 * -1);
+margin-inline: var(--app-margin);
+padding: 4px !important;
+background-color: var(--sidebar-color) !important;
+border-radius: var(--app-radius);
+backdrop-filter: blur(var(--app-blur));
+}
+
+/*
+ *  DISCOVER - TRASPARENZA
+ */
+.scroller_jkJlMe {
+    background-color: var(--main-content-color);
+    border-end-end-radius: var(--app-radius);
+}
+
+/*
+ *  FORUM NEW POST - TRASPARENZA
+ */
+.container__34c2c {
+    background-color: transparent;
+    border-radius: var(--popout-radius);
+    border: none;
+    overflow: hidden;
+}
+.container__34c2c:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /*
  *  FRIENDS LIST - TRASPARENZA COMPLETA
+ *  Rende trasparente tutta la sezione amici
  */
-[class*="friendsTable_"],
-[class*="tabBody_"] {
+
+/* Container principale della lista amici */
+.container_zrUwGA,
+.friendsTable_zrUwGA,
+.tabBody_zrUwGA {
     background-color: var(--main-content-color) !important;
     border-start-end-radius: var(--app-radius);
     border-end-end-radius: var(--app-radius);
@@ -244,83 +353,322 @@ body,
     backdrop-filter: blur(var(--app-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
 
-[class*="peopleListItem_"] {
+/* Rende trasparenti le singole righe degli amici */
+.peopleListItem_cc6179 {
     background-color: transparent !important;
     border-radius: var(--list-item-radius);
     transition: background-color 0.2s ease;
 }
 
-[class*="peopleListItem_"]:hover {
-    background-color: var(--card-color-hover, rgba(255, 255, 255, 0.05)) !important;
+/* Effetto hover sulle righe degli amici */
+.peopleListItem_cc6179:hover {
+    background-color: var(--card-color-hover) !important;
 }
 
-[class*="activeNow_"] {
+/* Rende trasparente la sezione ActiveNow */
+.activeNow_zrUwGA,
+.container_e8cb0e {
+    background-color: transparent !important;
+}
+
+/* Rende trasparente la barra di ricerca */
+.searchBar_zrUwGA {
+    background-color: rgba(var(--textarea-color), var(--textarea-alpha)) !important;
+    border-radius: var(--input-radius);
+}
+
+/* Rende trasparenti gli header delle categorie */
+.header_zrUwGA,
+.container__5f7a4,
+.content__1e4d3,
+.scroller__1e4d3 {
+    background-color: transparent !important;
+}
+
+/* Rende trasparente il container delle sezioni Online/Offline/etc */
+.container__4f5a7 {
     background-color: transparent !important;
 }
 
 /*
  *  NITRO - TRASPARENZA
  */
-[class*="applicationStore_"] {
-    background-color: var(--main-content-color) !important;
+.applicationStore_6U3jXZ {
+    background-color: var(--main-content-color);
     border-start-end-radius: var(--app-radius);
     border-end-end-radius: var(--app-radius);
 }
-
-[class*="applicationStore_"] [class*="scroller_"] {
-    background-color: transparent !important;
+.applicationStore_6U3jXZ .scroller__244e5 {
+    background-color: transparent;
 }
 
 /*
  *  MESSAGES ACTIONS - TRASPARENZA
  */
-[class*="popover_"] {
+.popover_f84418.popover_f84418 {
     background-color: transparent;
     border-radius: var(--popout-radius);
+    border: none;
     border: none !important;
     box-shadow: var(--liquid-glass-shadow), var(--popout-shadow) !important;
     overflow: hidden;
 }
+.popover_f84418.popover_f84418:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.popover_f84418.popover_f84418:before {
+    box-shadow: none;
+}
+.popover_f84418.popover_f84418:hover {
+    box-shadow: var(--liquid-glass-shadow), var(--popout-shadow) !important;
+}
 
 /*
- *  POPOUTS & MODALS
+ *  POPOUTS
  */
-[class*="popoutContainer_"],
-[class*="root_"][class*="modal_"],
-[class*="quickswitcher_"] {
+.popoutContainer_j9Vvzj {
     border-radius: var(--popout-radius);
     border: none;
-    background-color: var(--popout-color) !important;
+    background-color: var(--popout-color);
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
 
-[class*="backdrop_"] {
+/*
+ *  MODALS - TRASPARENZA
+ */
+.root__KoJTP {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(calc(var(--popout-blur) * 1.25)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.backdrop__78332 {
     background-color: rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: blur(calc(var(--popout-blur) * 1.4)) !important;
     opacity: 1 !important;
 }
 
-/*
- *  CONTEXT MENU & AUTOCOMPLETE - TRASPARENZA
- */
-[class*="menu_"][role="menu"],
-[class*="autocomplete_"] {
+/* MODALS -> V2 MODALS */
+.container_dvN-MP {
     border-radius: var(--popout-radius);
     border: none;
-    background-color: var(--popout-color) !important;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(calc(var(--popout-blur) * 1.25)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  APP DIRECTORY - TRASPARENZA
+ */
+.directoryContainer_da3f59 {
+    height: calc(100% - var(--app-margin) * 1.5);
+    margin-block: calc(var(--app-margin) / 2) var(--app-margin);
+    margin-inline: var(--app-margin);
+    background-color: var(--main-content-color) !important;
+    border-radius: var(--app-radius);
+    backdrop-filter: blur(var(--app-blur));
+}
+
+/*
+ *  AUTOSCOMPLETE - TRASPARENZA
+ */
+.autocomplete_CAMiwx {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+.autocomplete_CAMiwx .wrapper_mTknAg {
+    background-color: transparent;
+}
+.autocomplete_CAMiwx .base_CAMiwx {
+    border-radius: var(--popout-radius);
+}
+
+.container_d5ae15 {
+    border-radius: var(--popout-radius);
+    border: none;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+}
+.container_d5ae15:before {
+    position: absolute;
+    content: " ";
+    inset: 0;
+    background-color: var(--popout-color);
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.container_d5ae15 .autocompleteShadow_d5ae15 {
+    box-shadow: none !important;
+}
+.container_d5ae15 .autocompleteArrow-2CRgr2 {
+    background-color: var(--popout-color) !important;
+    box-shadow: none !important;
+}
+
+/*
+ *  CONTEXT MENU - TRASPARENZA
+ */
+.menu_M3qk4j {
+    border-radius: var(--popout-radius);
+    border: none;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+}
+.menu_M3qk4j:before {
+    position: absolute;
+    content: " ";
+    inset: 0;
+    background-color: var(--popout-color);
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
 }
 
 /*
  *  EMOJI PICKER - TRASPARENZA
  */
-[class*="contentWrapper_"]:has([class*="emojiPicker_"]),
-[class*="emojiPicker_"] {
-    background-color: var(--popout-color) !important;
+.wrapper_-sZhZn,
+.emojiPicker_-sZhZn {
+    background-color: transparent;
+}
+
+.contentWrapper_58b0l2 {
     border-radius: var(--popout-radius);
     border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.wrapper_-sZhZn:not(.emojiPickerHasTabWrapper_-sZhZn) {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  MESSAGES POPOUT - TRASPARENZA
+ */
+.messagesPopoutWrap_e8b59c {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    max-height: 80vh !important;
+}
+
+.channelHeader__35a7e {
+    border-radius: var(--popout-radius);
+    border: none;
+    overflow: hidden;
+}
+.channelHeader__35a7e:before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(hsla(0, 0%, 0%, 0.6)), var(--app-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    border-radius: inherit;
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    pointer-events: none;
+    z-index: -1;
+}
+.channelHeader__35a7e:before {
+    box-shadow: none;
+}
+
+.container_fc561d {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  SEARCH POPOUT - TRASPARENZA
+ */
+.container_cbVzxY {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  THREADS POPOUT - TRASPARENZA
+ */
+.container_c0tu5x {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+.popout__76f04 {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+}
+
+/*
+ *  USER POPOUT - TRASPARENZA
+ */
+.outer_P1YEjQ:not(.custom-user-profile-theme) {
+    --background-surface-high: var(--popout-color) !important;
+    --user-profile-overlay-background: var(--profile-gradient-primary-color) !important;
+    --profile-gradient-primary-color: var(--popout-color) !important;
+    --profile-gradient-secondary-color: var(--popout-color) !important;
+    --profile-avatar-border-color: var(--popout-color) !important;
+    --profile-body-background-color: var(--popout-color) !important;
+    --bg-surface-overlay: var(--profile-gradient-primary-color) !important;
+    --bg-mod-faint: var(--profile-body-background-color) !important;
+}
+
+.outer_P1YEjQ.user-profile-popout {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
@@ -328,35 +676,81 @@ body,
 /*
  *  SERVERS LIST - TRASPARENZA
  */
-[class*="guilds_"],
-nav[class*="guilds_"],
-[class*="guilds_"] [class*="scroller_"] {
+.wrapper_5dqHTG {
+    margin-block-end: calc(var(--custom-app-panels-height, 0) + 10px);
+    background-color: transparent;
+}
+
+.scroller_5dqHTG {
+    padding-block-start: var(--space-12);
     background-color: transparent !important;
 }
 
 /*
  *  SETTINGS - TRASPARENZA
  */
-[class*="standardSidebarView_"],
-[class*="contentRegion_"],
-[class*="contentRegionScroller_"],
-[class*="sidebarRegionScroller_"],
-[class*="layer_"] {
-    background-color: transparent !important;
+.contentRegion_jnk11m {
+    background-color: transparent;
 }
 
-[class*="standardSidebarView_"] {
+.container_aTnRjo {
     border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
     box-shadow: var(--popout-shadow-border), var(--popout-shadow);
     backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
 }
 
+.contentRegionScroller_jnk11m {
+    background-color: transparent;
+}
+
+.standardSidebarView_jnk11m {
+    border-radius: var(--popout-radius);
+    border: none;
+    background-color: var(--popout-color);
+    box-shadow: var(--popout-shadow-border), var(--popout-shadow);
+    backdrop-filter: blur(var(--popout-blur)) saturate(var(--liquid-glass-saturation)) brightness(1.1);
+    margin-block-start: var(--custom-app-top-bar-height);
+}
+
+.sidebarRegionScroller_jnk11m {
+    background-color: transparent;
+}
+
+.layer_Fd0FEH {
+    background-color: transparent;
+}
+
+.content_3Rvb29,
+.contentHeader_3Rvb29 {
+    background-color: transparent;
+}
+
 /*
- *  VISUAL REFRESH COMPATIBILITY
+ *  SHOP - TRASPARENZA
  */
-.visual-refresh,
-.visual-refresh [class*="bg_"],
-.visual-refresh [class*="wrapper_"],
-.visual-refresh [class*="guilds_"] {
-    background: transparent !important;
+.shop_Mqg79R {
+    border-start-end-radius: var(--app-radius);
+    border-end-end-radius: var(--app-radius);
+}
+
+.shop_XBXDcd,
+.shop_Mqg79R {
+    background-color: var(--main-content-color);
+}
+
+.page_4Qm5zV,
+.shop_XBXDcd {
+    background-color: transparent;
+}
+
+/*
+ *  VISUAL REFRESH
+ */
+.visual-refresh.refresh-fast-follow-guild-bg .bg_Fd0FEH {
+    background: transparent;
+}
+.visual-refresh.refresh-fast-follow-guild-bg .wrapper_5dqHTG {
+    background: transparent;
 }
